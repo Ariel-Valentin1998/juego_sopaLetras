@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>Sopa de letras</title>
+ <!--stilos necesesarios-->
+<link rel="stylesheet" type="text/css" href="style.css"  media="all">
+<link rel="stylesheet" href="bootstrap.min.css" >
+<link rel="stylesheet" type="text/css" href="jquery-ui.css">
+<link href="jquery.tagit.css" rel="stylesheet" type="text/css">
+<!-- scripts de tagit, wordfinder, juego, crear palabras-->
+<script type="text/javascript" src="jquery.min.js"></script> 
+<script type="text/javascript" src="wordfind.js"></script> 
+<script type="text/javascript" src="wordfindgame.js"></script> 
+<script type="text/javascript" src="bootstrap.min.js" ></script>
+<script type="text/javascript" src="jquery-ui.min.js"  ></script>
+<script type="text/javascript" src="tag-it.js"></script>
+
+
+</head>
+<body>
+  
+    <!-- Estilos que se usan cuando  se imprime-->
+    <style media="print">.ocultar {display:none;}
+    .col-md-3 { width: 25%;float: left;}
+    .col-md-9 {width: 75%;float: left;}
+    
+    .footer{
+  background-color: #ffffff;
+  width: 100%;
+  height: 50px;
+  bottom: 0;
+  position: fixed;
+  text-align: center;
+  color: #000000;
+}
+    </style>
+<pie-pag></pie-pag>
+<div class="container">
+    <div class="row">
+        
+        <script type="text/javascript">
+            var mytag;
+            $(document).ready(function () {
+                mytag = $("#ListaPalabras").tagit({});
+				Crear();
+            });
+        </script>
+
+            <script>
+              customElements.define("pie-pag", class Titulo extends HTMLElement {
+                  constructor() {
+                    
+                      super();
+                    
+                      this.innerHTML = "<h1><strong> Juego de Sopa de Letras</strong></h1>";
+                     
+                  }
+              });
+             
+
+              // Agregamos el componente a los elementos perzonalizados o propios
+              
+            </script>
+<div class="row  ocultar text-center">
+        <br />
+        <div class="panel panel-default">
+         <div class="panel-heading">
+           
+         <h4>1.- Escribe las palabras, luego presiona el botón <strong>"Crear Juego"</strong></h4></div>
+          <div class="panel-body">
+            <ul id="ListaPalabras">
+              <li>JavaScript</li>
+              <li>HTML</li>
+              <li>CSS</li>
+            </ul>
+          </div>
+        </div>
+</div>
+    
+
+ 
+<div class="row text-center">
+<div class="ocultar">
+<!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+<!-- Header -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-4331617637495482"
+     data-ad-slot="2764029251"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script><br/><br/>
+</div>
+
+<div>
+<div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading ocultar"><h4>2.- Crea la sopa e imprimela o simplemente resuelvela online</h4></div>
+      <div class="panel-body">
+      <div class="ocultar">
+      <button onclick="Crear();" class="btn btn-success btn-lg"> Crear Juego</button>
+      <button onclick="window.print();" class="btn btn-info btn-lg "> Imprimir</button>
+      <button id='solve' class="btn btn-danger btn-lg" >  Resolver</button>
+      </div>
+          <!-- Resultado de la sopa de letras con las pallabras-->
+            <div class="row">
+            <div class="col-md-3">
+              <div id='Palabras'></div>
+            </div>
+            <div class="col-md-9">
+              <div id='juego'></div>
+            </div>
+            </div>
+      </div>
+    </div>
+</div>
+
+    <script>
+    var words = [];
+	var gamePuzzle;
+	function Crear() {
+       //obtiene las palabras de la lista de la ul li
+	    datos = mytag[0].textContent.trim().split("×");
+      //metemos los datos a un arreglo es words (que es un conjunto de letras )
+	    for (i = 0; i < (datos.length)-1; i++) {
+	       words.push(datos[i]);
+
+	    }
+      $('#Juegos').show();
+      //se crean los juegos
+      gamePuzzle = wordfindgame.create(datos, '#juego', '#Palabras');
+      //esta linea crea la estructura de la sopa de letras
+	    var puzzle = wordfind.newPuzzle(datos, { height: 18, width: 18, fillBlanks: false });
+        wordfind.print(puzzle);   
+      }
+
+      //se crea la funcion de resolver 
+		$('#solve').click( function() {wordfindgame.solve(gamePuzzle, words);});
+    </script>
+</div>
+<footer  >
+  <script>
+      /** @interface */
+      class PieDeJuego {
+          mensaje() { throw new Error("Interfaz"); }
+      }
+      /** @implements {Saludo} */
+      class Pie {
+          /** @override */
+          mensaje() {
+              document.write("Ariel Valentín De Jesús Villafaña ");
+          }
+      }
+      const mensajes = [new Pie()];
+      for (var men of mensajes) {
+      men.mensaje();
+      }
+  </script>   
+<footer>
+<!--<div class="footer">
+  Ariel Valentín De Jesús Villafaña
+</div>-->
+ 
+
+</body>
+</html>
